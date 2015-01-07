@@ -43,31 +43,6 @@ by the chip.
 
 
 
-##Airview2 device API 
-
-Airview devices have an undocumented, but fairly simple text based API available 
-over the USB CDC-ACM virtual serial port provided by the device.
-            
-Commands are simple ASCII strings followed by carriage return + linefeed ('\r\n').
-            
-Responses come back as a byte sequence in a well defined format. 
-
-In order:
-
-* A response identifier
-* A pipe ('|')
-* Command-specific response information (?)
-* A comma
-* Command response data
-* A linefeed byte ('\n').
-
-A simple example is the response to 'init' (linefeed added for clarity):
-            
-    stat|ST52342,initializing...done(\n)
-
-
-
-
 ##Library development and reverse engineering
 
 This library was created after hours and hours of manual testing with `gtkterm`
@@ -93,6 +68,32 @@ without discussing it with me first.
 
 If you want to help, feel free to review the code for flaws, or open a terminal 
 connected to your Airview device and guess some commands as I have done :)
+
+
+
+
+
+##Airview2 device API documentation
+
+Airview devices have an undocumented, but fairly simple text based API available 
+over the USB CDC-ACM virtual serial port provided by the device.
+            
+Commands are simple ASCII strings followed by carriage return + linefeed ('\r\n').
+            
+Responses come back as a byte sequence in a well defined format. 
+
+In order:
+
+* A response identifier
+* A pipe ('|')
+* Command-specific response information (?)
+* A comma
+* Command response data
+* A linefeed byte ('\n').
+
+A simple example is the response to 'init' (linefeed added for clarity):
+            
+    stat|ST52342,initializing...done(\n)
 
 
 
