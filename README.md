@@ -130,8 +130,9 @@ Response data: 'initializing...done'
 
 ------------------------------------------------------------
             
-This must be called before issuing other commands, and also between commands to 
-stop the previously issued command.
+This must(?) be called before issuing other commands, and also between commands to 
+stop the previously issued command, particularly background scan which will run
+forever until initialize is called again.
                     
 I don't currently know what the numbers mean, they seem to be constant over time 
 even after unplugging the device, and possibly also constant on all devices of 
@@ -158,8 +159,11 @@ Response data: probably varies too, but here's an example:
         
 This command returns basic information about the device. Finding this API assisted 
 greatly in determining how to parse the radio RSSI data stream.
+
+If you need to know how to interpret the background scan RSSI list, call this
+command first to determine the frequencies.
         
-Some easily identifiable info includes: 
+Some easily identifiable response data includes: 
         
 * The PCI device ID (0241 here)
 * Two separate version numbers, perhaps hardware + firmware
