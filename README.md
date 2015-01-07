@@ -166,7 +166,7 @@ command first to determine the frequencies.
         
 Some easily identifiable response data includes: 
         
-* The PCI device ID (0241 here)
+* The USB device ID (0241 here)
 * Two separate version numbers, perhaps hardware + firmware
 * A very specific date, again either hardware or firmware related (compile date?)
 * Two obvious RF frequencies that make a range starting around 2.4GHz
