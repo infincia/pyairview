@@ -1,7 +1,7 @@
 #PyAirview
 
 This is a very simple python library for the Ubiquiti Airview2 2.4GHz spectrum 
-analyzer device API. 
+analyzer's undocumented device API, allowing it to be used by 3rd party applications.
 
 These were very cheap ($29-39) and originally came with a Java app for visualizing 
 usage of that frequency band, for Wi-Fi network planning, discovering rogue hotspots,
