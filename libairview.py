@@ -109,13 +109,8 @@ AIRVIEW_COMMAND_BACKGROUND_SCAN = 'bs'
 
 
 
-# setup serial port for the Airview
-serial_port = serial.Serial()
-serial_port.baudrate = 9600
-serial_port.timeout = 0.5
-serial_port.parity = serial.PARITY_NONE
-serial_port.stopbits = serial.STOPBITS_ONE
-serial_port.bytesize = serial.EIGHTBITS
+# global serial port for the Airview
+serial_port = None
 
 # background thread exit event
 rx_thread_stop = threading.Event()
@@ -195,17 +190,23 @@ def connect(port=None):
     """
         Connects to the given serial port, must be called before anything else.
         
-        Does not do any real error handling yet, if another process is already 
-        using the port then serial_port.open() will cause an exception.
+        Returns True if the connection was successful
 
     """
-    serial_port.port = port
-    log.debug('Port: %s' % port)
-    if serial_port.isOpen():
-        log.error('Port already open!!!')
-        return
-    serial_port.open()
-
+    global serial_port
+    try:
+        log.debug('Opening port: %s' % port)
+        serial_port = serial.Serial(
+            port = port,
+            baudrate = 9600,
+            stopbits = serial.STOPBITS_ONE,
+            bytesize = serial.EIGHTBITS,
+            parity = serial.PARITY_NONE,
+            timeout = 0.5)
+        return True
+    except serial.serialutil.SerialException:
+        log.exception('Serial port already open or unavailable')
+        return False
 
 def arbitrary_command(command_string):
     """
