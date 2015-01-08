@@ -94,7 +94,7 @@ if __name__ == '__main__':
     except KeyboardInterrupt as e:
         log.info('Canceling API search due to keyboard interrupt')
     finally:
-        log.info('Found %d commands: %s', len(found_commands), found_commands)
+        log.info('Checked %d commands total and got %d valid responses: %s', check_count, len(found_commands), found_commands)
         log.info('Exiting')
 
 
