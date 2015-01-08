@@ -70,8 +70,7 @@ if __name__ == '__main__':
         initialized = airview.initialize()
         if initialized:
             log.info('Starting background scan')
-            #airview.start_background_scan(callback=scan_callback)
-            airview.arbitrary_command('fake')
+            airview.start_background_scan(callback=scan_callback)
         else:
             log.info('Initialization failed!')
     except KeyboardInterrupt as e:
