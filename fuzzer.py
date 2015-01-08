@@ -74,7 +74,7 @@ if __name__ == '__main__':
         found_commands = {}
         airview.connect(port=port)
         for length in xrange(12): # limit to 12 for now, most known commands are 4 bytes
-            for command in itertools.permutations('abcdefghijklmnopqrstuvwxyz', length):
+            for command in itertools.product('abcdefghijklmnopqrstuvwxyz', repeat=length):
                 command_string = ''.join(command)
                 # ignore 'bs' because we know about it already and it starts a streaming response
                 if command_string == 'bs':
