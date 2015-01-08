@@ -79,6 +79,7 @@ if __name__ == '__main__':
                 # ignore 'bs' because we know about it already and it starts a streaming response
                 if command_string == 'bs':
                     continue
+                log.info('Checking: %s', command_string)
                 response = airview.arbitrary_command(command_string)
                 if response is not None:
                     log.info('Found command! %s: %s', command_string, response)
