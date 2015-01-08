@@ -72,9 +72,11 @@ if __name__ == '__main__':
     try:
         log.info('Beginning API command search')
         found_commands = {}
+        check_count = 0
         airview.connect(port=port)
         for length in xrange(12): # limit to 12 for now, most known commands are 4 bytes
             for command in itertools.product('abcdefghijklmnopqrstuvwxyz', repeat=length):
+                check_count = check_count + 1
                 command_string = ''.join(command)
                 # ignore 'bs' because we know about it already and it starts a streaming response
                 if command_string == 'bs':
@@ -84,6 +86,10 @@ if __name__ == '__main__':
                 if response is not None:
                     log.info('Found command! %s: %s', command_string, response)
                     found_commands[command_string] = response
+                if check_count % 100 == 0:
+                    log.info('--------------------------------------------------------------------------------------')
+                    log.info('Checked %d commands so far, got %d valid responses: %s', check_count, len(found_commands), found_commands)
+                    log.info('--------------------------------------------------------------------------------------')
 
     except KeyboardInterrupt as e:
         log.info('Canceling API search due to keyboard interrupt')
