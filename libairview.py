@@ -324,7 +324,7 @@ def background_scan(callback, thread_stop):
             break
     log.debug('Closing serial port')
     serial_port.close()
-    log.debug('Background scan thread  loop ended')
+    log.debug('Background scan thread loop ended')
 
 
 
