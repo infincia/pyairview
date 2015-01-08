@@ -11,20 +11,18 @@ from __future__ import print_function, division
     
 	Usage:  Install the libraries in requirements.txt, then run this script.
     
-            It sends every possible 6-digit [a-z] command to the device, checking 
-            for a response and recording the results as it goes. 
+            It sends every possible 12 character [a-z] command to the device, 
+            checking for a response and recording the results as it goes.
             
-            At the end of testing, the results are printed on the terminal.
+            Periodically results are printed to the terminal, and at the end of 
+            testing or if the test is canceled, the final results are printed on 
+            the terminal as well.
             
             This script explicitly ignores the 'bs' command because it is both
             already known, and it initiates a stream response that requires 
             proper handling of the response, rather than a single response which
             is what we're testing for anyway to discover other commands.
             
-            NOTE: itertools is currently NOT generating every possible permutation
-            of the [a-z] character set, for instance it misses 'init' which is a
-            known command. I'm investigating the reason.
-
 """
 
 __author__ = 'Stephen Oliver'
