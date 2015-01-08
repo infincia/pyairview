@@ -121,13 +121,13 @@ exist.
 
 #####Initialize device 
 
-Command: 'init'
+    Command: 'init'
+    
+    Response identifier: 'stat'
         
-Response identifier: 'stat'
+    Command specific response info: 'ST52342'
         
-Command specific response info: 'ST52342'
-        
-Response data: 'initializing...done'
+    Response data: 'initializing...done'
 
 ------------------------------------------------------------
             
@@ -146,15 +146,15 @@ knows at this point.
         
 #####Get device info
 
-Command: 'gdi'
+    Command: 'gdi'
 
-Response identifier: 'devi'
+    Response identifier: 'devi'
 
-Command-specific response info: 'AirView USB' (might vary depending on HW model)
+    Command-specific response info: 'AirView USB' (might vary depending on HW model)
 
-Response data: probably varies too, but here's an example:
-    
-    0000-0241,1.0,1.0,2009/1/23 15:12:43 EST,1,2399.0 2485.0 0.5 173 -134
+    Response data: probably varies too, but here's an example:
+
+        0000-0241,1.0,1.0,2009/1/23 15:12:43 EST,1,2399.0 2485.0 0.5 173 -134
     
 ------------------------------------------------------------
         
@@ -193,11 +193,11 @@ at the moment.
 
 #####Start streaming RSSI scan
 
-Command: 'bs'
+    Command: 'bs'
 
-Response identifier: 'scan'
+    Response identifier: 'scan'
 
-Response data: sequence of RSSI values separated by spaces
+    Response data: sequence of RSSI values separated by spaces
 
 ------------------------------------------------------------
             
