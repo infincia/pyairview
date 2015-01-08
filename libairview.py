@@ -341,7 +341,8 @@ def start_background_scan(callback=None):
     rx_thread = threading.Thread(target=background_scan, args=(callback, rx_thread_stop))
     rx_thread.daemon = True
     rx_thread.start()
-    rx_thread.join()
+    while rx_thread.isAlive:
+        rx_thread.join(5)
 
 
 
