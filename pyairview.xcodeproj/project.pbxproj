@@ -8,23 +8,21 @@
 
 /* Begin PBXFileReference section */
 		AA086DA51A5A63A8006C9731 /* requirements.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = requirements.txt; sourceTree = "<group>"; };
-		AA086DA61A5C5415006C9731 /* fuzzer.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = fuzzer.py; sourceTree = "<group>"; };
 		AA19ECFE16FC02200041655E /* libairview.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = libairview.py; sourceTree = "<group>"; };
 		AA19ECFF16FC02200041655E /* README.md */ = {isa = PBXFileReference; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		AA19ED0016FC02200041655E /* graph.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = graph.py; sourceTree = "<group>"; };
-		AA19ED0316FC0D980041655E /* test.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = test.py; sourceTree = "<group>"; };
+		AA19ED0316FC0D980041655E /* libairview_test.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = libairview_test.py; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
 		AA19ECF716FC018E0041655E = {
 			isa = PBXGroup;
 			children = (
-				AA086DA61A5C5415006C9731 /* fuzzer.py */,
 				AA19ED0016FC02200041655E /* graph.py */,
+				AA19ED0316FC0D980041655E /* libairview_test.py */,
 				AA19ECFE16FC02200041655E /* libairview.py */,
 				AA19ECFF16FC02200041655E /* README.md */,
 				AA086DA51A5A63A8006C9731 /* requirements.txt */,
-				AA19ED0316FC0D980041655E /* test.py */,
 			);
 			sourceTree = "<group>";
 		};
