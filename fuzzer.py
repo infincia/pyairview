@@ -59,7 +59,7 @@ if __name__ == '__main__':
     if system_name == 'Linux':
         port = '/dev/ttyACM0' # arbitrary, need a way to detect/configure
     elif system_name == 'Darwin': # OS X
-        port = '/dev/tty.usbmodem411' # this seems arbitrary too, but consistent
+        port = '/dev/tty.usbmodem621' # this seems arbitrary too, but consistent
     else:
         """
                 Note: Need to find out what the device name will be on FreeBSD 
