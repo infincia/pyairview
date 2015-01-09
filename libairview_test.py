@@ -53,7 +53,7 @@ import argparse
 import itertools
 
 
-import libairview as airview
+import libairview
 
 
 
@@ -72,10 +72,10 @@ def scan_callback(rssi_list=None):
 def scan(args):
     log.info('Starting Airview RSSI scan')
     try:
-        airview.start_background_scan(callback=scan_callback)
+        libairview.start_background_scan(callback=scan_callback)
     except KeyboardInterrupt as e:
         log.info('Cancelling scan')
-        airview.stop_background_scan()
+        libairview.stop_background_scan()
     finally:
         log.info('Exiting')
 
@@ -96,7 +96,7 @@ def fuzzer(args):
                 if command_string == 'bs':
                     continue
                 log.info('Checking: %s', command_string)
-                response = airview.arbitrary_command(command_string)
+                response = libairview.arbitrary_command(command_string)
                 if response is not None:
                     log.info('Found command! %s: %s', command_string, response)
                     found_commands[command_string] = response
@@ -127,12 +127,12 @@ if __name__ == '__main__':
 
     args = arg_parser.parse_args()
 
-    connected = airview.connect(port=args.port)
+    connected = libairview.connect(port=args.port)
     if not connected:
         log.error('Port already in use')
         sys.exit(1)
     log.info('Initializing device')
-    initialized = airview.initialize()
+    initialized = libairview.initialize()
     if initialized:
         args.func(args)
     else:
