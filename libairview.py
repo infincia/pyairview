@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-
+from __future__ import print_function
 
 """ libairview
 
@@ -53,7 +53,7 @@ import re
 try:
     import serial
 except ImportError:
-    print 'libairview requires the PySerial library to function'
+    print('libairview requires the PySerial library to function')
     sys.exit(1)
 
 
