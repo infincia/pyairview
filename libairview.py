@@ -128,6 +128,7 @@ log = logging.getLogger(__name__)
 
 
 
+# internal helper commands
 
 def _send_command(command_string):
     """
@@ -188,12 +189,58 @@ def _parse_command_response(buffer):
     return None, None, None
 
 
+def _background_scan_loop(callback, thread_stop):
+    """
+        Initiate the primary feature of the device: continuous RF power level 
+        scanning across the covered RF range. 
+        
+        Currently must be run in a background thread.
+
+        Returns RSSI information incrementally in a callback at the moment, but 
+        it may be better to yield instead and possibly find a solutiont that 
+        avoids the need for threading altogether.
+
+    """
+    log.debug('Background scan thread running')
+
+
+    _send_command(AIRVIEW_COMMAND_BACKGROUND_SCAN)
+    log.debug('Background scan command sent to device')
+
+    while not thread_stop.is_set():
+        buffer = _read_response()
+        if buffer is not None:
+            log.debug('Got scan response message: %s', buffer)
+            command_id, command_info, response_data = _parse_command_response(buffer)
+            if command_id == 'scan':
+                raw_samples = response_data.split()
+                log.debug('---------------------------------------')
+                log.debug('raw samples: %s', raw_samples)
+                log.debug('---------------------------------------')
+                cleaned_list = list()
+                for rssi_level in raw_samples:
+                    cleaned_list.append(int(rssi_level))
+                log.debug('---------------------------------------')
+                log.debug('Length of sample list: %d', len(cleaned_list))
+                log.debug('Cleaned rssi list: %s', cleaned_list)
+                log.debug('---------------------------------------')
+                callback(rssi_list=cleaned_list)
+            else:
+                log.debug('Got unknown response during scan: %s', buffer)
+                continue
+        else:
+            log.debug('No serial buffer received during scan')
+            break
+    log.debug('Closing serial port')
+    serial_port.close()
+    log.debug('Background scan thread loop ended')
 
 
 
 
 
 
+# public API
 
 def connect(port=None):
     """
@@ -216,6 +263,10 @@ def connect(port=None):
     except serial.serialutil.SerialException:
         log.exception('Serial port already open or unavailable')
         return False
+
+
+
+
 
 def arbitrary_command(command_string):
     """
@@ -290,56 +341,6 @@ def get_device_info():
 
 
 
-def background_scan(callback, thread_stop):
-    """
-        Initiate the primary feature of the device: continuous RF power level 
-        scanning across the covered RF range. 
-        
-        Currently must be run in a background thread.
-
-        Returns RSSI information incrementally in a callback at the moment, but 
-        it may be better to yield instead and possibly find a solutiont that 
-        avoids the need for threading altogether.
-
-    """
-    log.debug('Background scan thread running')
-
-
-    _send_command(AIRVIEW_COMMAND_BACKGROUND_SCAN)
-    log.debug('Background scan command sent to device')
-
-    while not thread_stop.is_set():
-        buffer = _read_response()
-        if buffer is not None:
-            log.debug('Got scan response message: %s', buffer)
-            command_id, command_info, response_data = _parse_command_response(buffer)
-            if command_id == 'scan':
-                raw_samples = response_data.split()
-                log.debug('---------------------------------------')
-                log.debug('raw samples: %s', raw_samples)
-                log.debug('---------------------------------------')
-                cleaned_list = list()
-                for rssi_level in raw_samples:
-                    cleaned_list.append(int(rssi_level))
-                log.debug('---------------------------------------')
-                log.debug('Length of sample list: %d', len(cleaned_list))
-                log.debug('Cleaned rssi list: %s', cleaned_list)
-                log.debug('---------------------------------------')
-                callback(rssi_list=cleaned_list)
-            else:
-                log.debug('Got unknown response during scan: %s', buffer)
-                continue
-        else:
-            log.debug('No serial buffer received during scan')
-            break
-    log.debug('Closing serial port')
-    serial_port.close()
-    log.debug('Background scan thread loop ended')
-
-
-
-
-
 
 def start_background_scan(callback=None):
     """
@@ -348,7 +349,7 @@ def start_background_scan(callback=None):
 
     """
     log.debug('Starting scan in background thread')
-    rx_thread = threading.Thread(target=background_scan, args=(callback, rx_thread_stop))
+    rx_thread = threading.Thread(target=_background_scan_loop, args=(callback, rx_thread_stop))
     rx_thread.daemon = True
     rx_thread.start()
     while rx_thread.isAlive:
