@@ -2,38 +2,48 @@
 
 from __future__ import print_function
 
-""" libairview
-
+"""
+    libairview is a very simple Python library for the Ubiquiti Airview2 2.4GHz
+    spectrum analyzer, which has an undocumented device API. It allows the 
+    Airview device to be used by 3rd party applications.
+    
     Copyright 2013 Infincia LLC
+
+
+    Library usage
+    ----------------------------------------------------------------------------
     
-    See LICENSE file for license information
-    
-	Documentation
+        from __future__ import print_function
+
+        import libairview
+
+        # open the proper serial port
+        libairview.connect(port="/dev/ttyACM0")
+
+        # initialize the device
+        libairview.initialize()
+
+        # retrieve device-specific information like RF frequency range and channel size
+        device_info = libairview.get_device_info()
+
+        '''
+            start RSSI scanning in a background thread. callback should take a parameter
+            named 'rssi_list', which will be a list of rssi values. Use information
+            obtained in device_info to interpret the RSSI values and pair them with
+            exact frequencies.
+
+        '''
+        def scan_callback(rssi_list=None):
+            print('RSSI levels received: %s', rssi_list)
+
+        libairview.start_background_scan(callback=scan_callback)
+
+
+
+	Device API documentation
     ----------------------------------------------------------------------------
             
-            See the README.md file included with this code.
-
-
-    Usage
-    ----------------------------------------------------------------------------
-            
-            1. Call libairview.open(port="/dev/ttyACM0") 
-            
-                Substitute the correct serial port on your system. This will 
-                connect to the devices serial port.
-            
-            2. Call libairview.initialize() 
-            
-                This should initialize the Airview device, or reset it if it has
-                been used already while plugged in.
-            
-            3. Call libairview.start_background_scan(callback=callback)
-            
-                This starts a background thread and calls the callback function,
-                which takes a single parameter: rssi_list. The meaning of those
-                values depends on the device in use. The RF information needed to
-                use it properly can be retrieved by running get_device_info().
-
+            See the DEVICE_API.md file included with this code.
 
 
 """
