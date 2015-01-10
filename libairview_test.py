@@ -113,7 +113,6 @@ def fuzzer(args):
 
 if __name__ == '__main__':
     arg_parser = argparse.ArgumentParser(description='Airview2 test program')
-    arg_parser.add_argument('-v', '--version', action='version', version=libairview.__version__)
     arg_parser.add_argument('-p', '--port', help='The serial port of the Airview2 device (/dev/tty*)', required=True)
 
     subparsers = arg_parser.add_subparsers()
