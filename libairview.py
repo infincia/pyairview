@@ -40,7 +40,6 @@ from __future__ import print_function
 
 __author__ = 'Stephen Oliver'
 __maintainer__ = 'Stephen Oliver <steve@infincia.com>'
-__version__ = '0.1a0'
 __license__ = 'MIT'
 
 
