@@ -3,6 +3,7 @@
 [![License](https://pypip.in/license/pyairview/badge.svg)](https://pypi.python.org/pypi/pyairview/)
 [![Supported Python versions](https://pypip.in/py_versions/pyairview/badge.svg)](https://pypi.python.org/pypi/pyairview/)
 [![Development Status](https://pypip.in/status/pyairview/badge.svg)](https://pypi.python.org/pypi/pyairview/)
+[![Build Status](https://travis-ci.org/infincia/pyairview.svg?branch=master)](https://travis-ci.org/infincia/pyairview)
 
 PyAirview is a very simple Python library for the Ubiquiti Airview2 2.4GHz
 spectrum analyzer, which has an undocumented device API.
