@@ -4,23 +4,10 @@
 [![Supported Python versions](https://pypip.in/py_versions/pyairview/badge.svg)](https://pypi.python.org/pypi/pyairview/)
 [![Development Status](https://pypip.in/status/pyairview/badge.svg)](https://pypi.python.org/pypi/pyairview/)
 
-This is a very simple python library for the Ubiquiti Airview2 2.4GHz spectrum 
-analyzer's undocumented device API, allowing it to be used by 3rd party applications.
+PyAirview is a very simple Python library for the Ubiquiti Airview2 2.4GHz
+spectrum analyzer, which has an undocumented device API.
 
-These were very cheap ($29-39) and originally came with a Java app for visualizing 
-usage of that frequency band, for Wi-Fi network planning, discovering rogue hotspots,
-diagnosing Bluetooth issues, etc. 
-
-However the original Java app frequently didn't work properly, required a restart
-after running for more than a short period of time, and was abandoned long before 
-they stopped selling the device. 
-
-Ubiquiti has so far refused to provide any sort of documented API or library 
-for the device, so this is an attempt to provide a bit of both. 
-
-Note that this library is attempting to wrap an undocumented API on the device, 
-so all functionality has been discovered via manual testing (though a "fuzzer" is 
-included, it hasn't yet found any commands that weren't already known). 
+PyAirview allows the Airview device to be used by 3rd party applications.
 
 The library works pretty well for the intended purpose :)
 
@@ -29,10 +16,11 @@ languages and so that there is a common low level library available, but it's
 simple enough that even a high level port to Ruby or C# would probably take no 
 more than a day. 
 
-
-
-
 ##Airview2 hardware
+
+The Airview2 devices were very cheap ($29-39) and originally came with a Java 
+app for visualizing usage of that frequency band, for Wi-Fi network planning, 
+discovering rogue hotspots, diagnosing Bluetooth issues, etc.
 
 Inside, the device is basically just a simple microcontroller (A [CC2011](http://www.ti.com/product/cc2511)) 
 with an integrated 2.4GHz radio and a USB interface. It uses the standard USB 
@@ -43,9 +31,6 @@ I don't possess a copy of it outside my own Airview2 device, even in dumped bina
 form, so I don't know much about it but it seems to be a simple command/response
 loop coupled with a function to use the native RSSI power level scanning provided
 by the chip.
-
-
-
 
 ##Library development and reverse engineering
 
