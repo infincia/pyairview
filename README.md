@@ -14,7 +14,39 @@ The library works pretty well for the intended purpose :)
 Once I have the basics written and documented I may port it to C for use in other
 languages and so that there is a common low level library available, but it's 
 simple enough that even a high level port to Ruby or C# would probably take no 
-more than a day. 
+more than a day.
+
+
+##Device API documentation
+
+See the DEVICE_API.md file included in this repository
+
+##Usage
+
+    from __future__ import print_function
+
+    import libairview
+
+    # open the proper serial port
+    libairview.connect(port="/dev/ttyACM0")
+
+    # initialize the device
+    libairview.initialize()
+
+    # retrieve device-specific information like RF frequency range and channel size
+    device_info = libairview.get_device_info()
+
+    """
+        start RSSI scanning in a background thread. callback should take a parameter
+        named 'rssi_list', which will be a list of rssi values. Use information
+        obtained in device_info to interpret the RSSI values and pair them with
+        exact frequencies.
+
+    """
+    def scan_callback(rssi_list=None):
+        print('RSSI levels received: %s', rssi_list)
+
+    libairview.start_background_scan(callback=scan_callback)
 
 ##Airview2 hardware
 
