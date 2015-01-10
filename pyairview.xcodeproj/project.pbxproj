@@ -11,6 +11,11 @@
 		AA19ECFE16FC02200041655E /* libairview.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = libairview.py; sourceTree = "<group>"; };
 		AA19ECFF16FC02200041655E /* README.md */ = {isa = PBXFileReference; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		AA19ED0316FC0D980041655E /* libairview_test.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = libairview_test.py; sourceTree = "<group>"; };
+		AA8C3D4B1A60A5BE00ACA8D4 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		AA8C3D4C1A60A5BE00ACA8D4 /* setup.cfg */ = {isa = PBXFileReference; lastKnownFileType = text; path = setup.cfg; sourceTree = "<group>"; };
+		AA8C3D4D1A60A5BE00ACA8D4 /* setup.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = setup.py; sourceTree = "<group>"; };
+		AA8C3D4E1A60A9E000ACA8D4 /* README.rst */ = {isa = PBXFileReference; lastKnownFileType = text; path = README.rst; sourceTree = "<group>"; };
+		AA8C3D4F1A60B59C00ACA8D4 /* DEVICE_API.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = DEVICE_API.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -19,8 +24,13 @@
 			children = (
 				AA19ED0316FC0D980041655E /* libairview_test.py */,
 				AA19ECFE16FC02200041655E /* libairview.py */,
+				AA8C3D4B1A60A5BE00ACA8D4 /* LICENSE */,
 				AA19ECFF16FC02200041655E /* README.md */,
+				AA8C3D4F1A60B59C00ACA8D4 /* DEVICE_API.md */,
+				AA8C3D4E1A60A9E000ACA8D4 /* README.rst */,
 				AA086DA51A5A63A8006C9731 /* requirements.txt */,
+				AA8C3D4C1A60A5BE00ACA8D4 /* setup.cfg */,
+				AA8C3D4D1A60A5BE00ACA8D4 /* setup.py */,
 			);
 			sourceTree = "<group>";
 		};
