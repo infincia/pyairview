@@ -16,6 +16,7 @@
 		AA8C3D4D1A60A5BE00ACA8D4 /* setup.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = setup.py; sourceTree = "<group>"; };
 		AA8C3D4E1A60A9E000ACA8D4 /* README.rst */ = {isa = PBXFileReference; lastKnownFileType = text; path = README.rst; sourceTree = "<group>"; };
 		AA8C3D4F1A60B59C00ACA8D4 /* DEVICE_API.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = DEVICE_API.md; sourceTree = "<group>"; };
+		AA8C3D521A60FEA400ACA8D4 /* tests.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = tests.py; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -31,7 +32,16 @@
 				AA086DA51A5A63A8006C9731 /* requirements.txt */,
 				AA8C3D4C1A60A5BE00ACA8D4 /* setup.cfg */,
 				AA8C3D4D1A60A5BE00ACA8D4 /* setup.py */,
+				AA8C3D511A60FDAD00ACA8D4 /* tests */,
 			);
+			sourceTree = "<group>";
+		};
+		AA8C3D511A60FDAD00ACA8D4 /* tests */ = {
+			isa = PBXGroup;
+			children = (
+				AA8C3D521A60FEA400ACA8D4 /* tests.py */,
+			);
+			path = tests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
