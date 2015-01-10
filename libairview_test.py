@@ -41,7 +41,6 @@ from __future__ import print_function, division
 
 __author__ = 'Stephen Oliver'
 __maintainer__ = 'Stephen Oliver <steve@infincia.com>'
-__version__ = '0.1-prerelease'
 __license__ = 'MIT'
 
 
