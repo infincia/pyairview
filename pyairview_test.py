@@ -152,14 +152,7 @@ if __name__ == '__main__':
     if not connected:
         log.error('Port already in use')
         sys.exit(1)
-    log.info('Initializing device')
-    initialized = pyairview.initialize()
-    if initialized:
-        args.func(args)
-    else:
-        log.info('Initialization failed!')
-
-
+    args.func(args)
 
 
 
