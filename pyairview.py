@@ -249,6 +249,11 @@ def _begin_scan_loop(callback, thread_stop):
         else:
             log.debug('No serial buffer received during scan')
             break
+    """ 
+        Send the end scan command to the device, and flush any partial data 
+        left in the serial port buffer before returning
+    """
+    _end_scan()
     log.debug('Scan thread loop ended')
 
 
