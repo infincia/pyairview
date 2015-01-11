@@ -413,4 +413,5 @@ def stop_scan():
         are handled and various other things. Requires testing.
     
     """
+    log.debug('Stopping scan in background thread')
     rx_thread_stop.set()
