@@ -79,7 +79,6 @@ def scan(args):
         log.info('Exiting')
 
 def device_info(args):
-    log.info('Getting Airview device info')
     try:
         device = pyairview.get_device_info()
 
@@ -93,8 +92,7 @@ def device_info(args):
 
     except KeyboardInterrupt as e:
         pass
-    finally:
-        log.info('Exiting')
+
 
 def fuzzer(args):
     log.info('Starting Airview API Fuzzer')
