@@ -236,8 +236,6 @@ def _begin_scan_loop(callback, thread_stop):
         else:
             log.debug('No serial buffer received during scan')
             break
-    log.debug('Closing serial port')
-    serial_port.close()
     log.debug('Scan thread loop ended')
 
 
