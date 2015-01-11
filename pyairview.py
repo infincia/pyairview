@@ -3,7 +3,7 @@
 from __future__ import print_function
 
 """
-    libairview is a very simple Python library for the Ubiquiti Airview2 2.4GHz
+    PyAirview is a very simple Python library for the Ubiquiti Airview2 2.4GHz
     spectrum analyzer, which has an undocumented device API. It allows the 
     Airview device to be used by 3rd party applications.
     
@@ -15,16 +15,16 @@ from __future__ import print_function
     
         from __future__ import print_function
 
-        import libairview
+        import pyairview
 
         # open the proper serial port
-        libairview.connect(port="/dev/ttyACM0")
+        pyairview.connect(port="/dev/ttyACM0")
 
         # initialize the device
-        libairview.initialize()
+        pyairview.initialize()
 
         # retrieve device-specific information like RF frequency range and channel size
-        device_info = libairview.get_device_info()
+        device_info = pyairview.get_device_info()
 
         '''
             start RSSI scanning in a background thread. callback should take a parameter
@@ -36,7 +36,7 @@ from __future__ import print_function
         def scan_callback(rssi_list=None):
             print('RSSI levels received: %s', rssi_list)
 
-        libairview.start_background_scan(callback=scan_callback)
+        pyairview.start_scan(callback=scan_callback)
 
 
 
@@ -62,18 +62,15 @@ import re
 try:
     import serial
 except ImportError:
-    print('libairview requires the PySerial library to function')
+    print('PyAirview requires the PySerial library to function')
     sys.exit(1)
 
 
 
+# constants
 
-
-###########
-# globals #
-###########
-
-""" 
+RESPONSE_REGEX_PATTERN = "^(?P<command_id>\w+)\|(?P<command_info>[\w\s]+),(?P<response_data>.+)"
+"""
     Regex to match command responses with named capture groups. Refer to the
     included README.md file for the structure of responses.
     
@@ -102,26 +99,23 @@ except ImportError:
         * Dashes
     
 """
-RESPONSE_REGEX_PATTERN = "^(?P<command_id>\w+)\|(?P<command_info>[\w\s]+),(?P<response_data>.+)"
 
 
-"""
-    Known commands
-   
-    These are documented in the included README.md file, but kept as constants
-    for organization purposes here
-    
-"""
 AIRVIEW_COMMAND_INITIALIZE = 'init'
 AIRVIEW_COMMAND_GET_DEVICE_INFO = 'gdi'
-AIRVIEW_COMMAND_BACKGROUND_SCAN = 'bs'
+AIRVIEW_COMMAND_BEGIN_SCAN = 'bs'
+AIRVIEW_COMMAND_END_SCAN = 'es'
 
 
+
+###########
+# globals #
+###########
 
 # global serial port for the Airview
 serial_port = None
 
-# background thread exit event
+# scan thread exit event
 rx_thread_stop = threading.Event()
 
 log = logging.getLogger(__name__)
@@ -189,7 +183,7 @@ def _parse_command_response(buffer):
     return None, None, None
 
 
-def _background_scan_loop(callback, thread_stop):
+def _begin_scan_loop(callback, thread_stop):
     """
         Initiate the primary feature of the device: continuous RF power level 
         scanning across the covered RF range. 
@@ -201,11 +195,11 @@ def _background_scan_loop(callback, thread_stop):
         avoids the need for threading altogether.
 
     """
-    log.debug('Background scan thread running')
+    log.debug('Scan thread loop running')
 
 
-    _send_command(AIRVIEW_COMMAND_BACKGROUND_SCAN)
-    log.debug('Background scan command sent to device')
+    _send_command(AIRVIEW_COMMAND_BEGIN_SCAN)
+    log.debug('Begin scan command sent to device')
 
     while not thread_stop.is_set():
         buffer = _read_response()
@@ -233,7 +227,7 @@ def _background_scan_loop(callback, thread_stop):
             break
     log.debug('Closing serial port')
     serial_port.close()
-    log.debug('Background scan thread loop ended')
+    log.debug('Scan thread loop ended')
 
 
 
@@ -342,14 +336,14 @@ def get_device_info():
 
 
 
-def start_background_scan(callback=None):
+def start_scan(callback=None):
     """
-        Start the background scan thread and block the caller until the thread
-        gracefully exits. Call stop_background_scan() to do that.
+        Start the scan thread and block the caller until the thread
+        gracefully exits. Call stop_scan() to do that.
 
     """
     log.debug('Starting scan in background thread')
-    rx_thread = threading.Thread(target=_background_scan_loop, args=(callback, rx_thread_stop))
+    rx_thread = threading.Thread(target=_begin_scan_loop, args=(callback, rx_thread_stop))
     rx_thread.daemon = True
     rx_thread.start()
     while rx_thread.isAlive:
@@ -359,7 +353,7 @@ def start_background_scan(callback=None):
 
 
 
-def stop_background_scan():
+def stop_scan():
     """
         Should cause the rx_thread to stop looping and gracefully exit. Should.
         It may not at the moment depending on how exceptions are handled and

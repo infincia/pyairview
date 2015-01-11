@@ -3,7 +3,7 @@
 from __future__ import print_function, division
 
 
-""" libairview test
+""" PyAirview test
 
     Copyright 2014 Infincia LLC
     
@@ -15,9 +15,9 @@ from __future__ import print_function, division
             The only mandatory option is the port (-p /dev/tty*), and a command,
             either 'scan' or 'fuzzer'.
             
-            Note that this is simply an example of how to use the libairview 
+            Note that this is simply an example of how to use the pyairview 
             library in your own code. Typically only 5-6 lines of code are needed
-            in order to use libairview for RSSI scanning.
+            in order to use pyairview for RSSI scanning.
 
     Command: fuzzer
 
@@ -52,7 +52,7 @@ import argparse
 import itertools
 
 
-import libairview
+import pyairview
 
 
 
@@ -71,10 +71,10 @@ def scan_callback(rssi_list=None):
 def scan(args):
     log.info('Starting Airview RSSI scan')
     try:
-        libairview.start_background_scan(callback=scan_callback)
+        pyairview.start_scan(callback=scan_callback)
     except KeyboardInterrupt as e:
         log.info('Cancelling scan')
-        libairview.stop_background_scan()
+        pyairview.stop_scan()
     finally:
         log.info('Exiting')
 
@@ -95,7 +95,7 @@ def fuzzer(args):
                 if command_string == 'bs':
                     continue
                 log.info('Checking: %s', command_string)
-                response = libairview.arbitrary_command(command_string)
+                response = pyairview.arbitrary_command(command_string)
                 if response is not None:
                     log.info('Found command! %s: %s', command_string, response)
                     found_commands[command_string] = response
@@ -125,12 +125,12 @@ if __name__ == '__main__':
 
     args = arg_parser.parse_args()
 
-    connected = libairview.connect(port=args.port)
+    connected = pyairview.connect(port=args.port)
     if not connected:
         log.error('Port already in use')
         sys.exit(1)
     log.info('Initializing device')
-    initialized = libairview.initialize()
+    initialized = pyairview.initialize()
     if initialized:
         args.func(args)
     else:

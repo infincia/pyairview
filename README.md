@@ -26,16 +26,16 @@ See the DEVICE_API.md file included in this repository
 
     from __future__ import print_function
 
-    import libairview
+    import pyairview
 
     # open the proper serial port
-    libairview.connect(port="/dev/ttyACM0")
+    pyairview.connect(port="/dev/ttyACM0")
 
     # initialize the device
-    libairview.initialize()
+    pyairview.initialize()
 
     # retrieve device-specific information like RF frequency range and channel size
-    device_info = libairview.get_device_info()
+    device_info = pyairview.get_device_info()
 
     """
         start RSSI scanning in a background thread. callback should take a parameter
@@ -47,7 +47,7 @@ See the DEVICE_API.md file included in this repository
     def scan_callback(rssi_list=None):
         print('RSSI levels received: %s', rssi_list)
 
-    libairview.start_background_scan(callback=scan_callback)
+    pyairview.start_scan(callback=scan_callback)
 
 ##Airview2 hardware
 
