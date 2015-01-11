@@ -131,7 +131,7 @@ serial_port = None
 # scan thread exit event
 rx_thread_stop = threading.Event()
 
-log = logging.getLogger(__name__)
+_log = logging.getLogger(__name__)
 
 
 
@@ -142,7 +142,7 @@ def _send_command(command_string):
         Send the given command over the serial port
 
     """
-    log.debug('Sending command: %s', command_string)
+    _log.debug('Sending command: %s', command_string)
     serial_port.flushInput()
     serial_port.write(command_string + AIRVIEW_PROTOCOL_DELIMITER)
     serial_port.flushOutput()
@@ -156,21 +156,21 @@ def _read_response():
         Returns the complete message
 
     """
-    log.debug('Reading command response')
+    _log.debug('Reading command response')
     buffer = ''
     valid_response = False
     while True:
         raw = serial_port.read()
         if len(raw) == 0:
-            log.debug('Got incomplete or no response message: %s', buffer)
+            _log.debug('Got incomplete or no response message: %s', buffer)
             break
         buffer += raw
         if buffer[-1:] == AIRVIEW_PROTOCOL_DELIMITER:
             valid_response = True
-            log.debug('Got proper response end')
+            _log.debug('Got proper response end')
             break
     if valid_response:
-        log.debug('Got complete response message: %s', buffer)
+        _log.debug('Got complete response message: %s', buffer)
         return buffer
     return None
 
@@ -190,9 +190,9 @@ def _parse_command_response(buffer):
         command_info = match.group('command_info')
         response_data = match.group('response_data')
 
-        log.debug('Command ID: %s', command_id)
-        log.debug('Command Info: %s', command_info)
-        log.debug('Response Data: %s', response_data)
+        _log.debug('Command ID: %s', command_id)
+        _log.debug('Command Info: %s', command_info)
+        _log.debug('Response Data: %s', response_data)
         return command_id, command_info, response_data
     return None, None, None
 
@@ -209,28 +209,28 @@ def _begin_scan_loop(callback, thread_stop):
         avoids the need for threading altogether.
 
     """
-    log.debug('Scan thread loop running')
+    _log.debug('Scan thread loop running')
 
 
     _send_command(AIRVIEW_COMMAND_BEGIN_SCAN)
-    log.debug('Begin scan command sent to device')
+    _log.debug('Begin scan command sent to device')
 
     while not thread_stop.is_set():
         buffer = _read_response()
         if buffer is not None:
-            log.debug('Got scan response message: %s', buffer)
+            _log.debug('Got scan response message: %s', buffer)
             command_id, command_info, response_data = _parse_command_response(buffer)
             if command_id == 'scan':
                 raw_samples = response_data.split()
-                log.debug('---------------------------------------')
-                log.debug('raw samples: %s', raw_samples)
-                log.debug('---------------------------------------')
+                _log.debug('---------------------------------------')
+                _log.debug('raw samples: %s', raw_samples)
+                _log.debug('---------------------------------------')
                 rssi_list = list()
                 for rssi_level in raw_samples:
                     rssi_list.append(int(rssi_level))
-                log.debug('---------------------------------------')
-                log.debug('Received %d RSSI readings: %s', len(rssi_list), rssi_list)
-                log.debug('---------------------------------------')
+                _log.debug('---------------------------------------')
+                _log.debug('Received %d RSSI readings: %s', len(rssi_list), rssi_list)
+                _log.debug('---------------------------------------')
                 """
                     This is the expected number of RSSI readings. Only return
                     them in the callback if the proper number of readings has
@@ -244,17 +244,17 @@ def _begin_scan_loop(callback, thread_stop):
                 if len(rssi_list) == 173:
                     callback(rssi_list=rssi_list)
             else:
-                log.debug('Got unknown response during scan: %s', buffer)
+                _log.debug('Got unknown response during scan: %s', buffer)
                 continue
         else:
-            log.debug('No serial buffer received during scan')
+            _log.debug('No serial buffer received during scan')
             break
     """ 
-        Send the end scan command to the device, and flush any partial data 
+        Send the end scan command to the device, and flush any partial data
         left in the serial port buffer before returning
     """
     _end_scan()
-    log.debug('Scan thread loop ended')
+    _log.debug('Scan thread loop ended')
 
 
 def _end_scan():
@@ -268,7 +268,7 @@ def _end_scan():
 
     """
     _send_command(AIRVIEW_COMMAND_END_SCAN)
-    log.debug('End scan command sent to device')
+    _log.debug('End scan command sent to device')
 
 
 
@@ -283,7 +283,7 @@ def connect(port):
     """
     global serial_port
     try:
-        log.debug('Opening port: %s' % port)
+        _log.debug('Opening port: %s' % port)
         serial_port = serial.Serial(
             port = port,
             baudrate = 9600,
@@ -293,7 +293,7 @@ def connect(port):
             timeout = 0.5)
         return True
     except serial.serialutil.SerialException:
-        log.exception('Serial port already open or unavailable')
+        _log.exception('Serial port already open or unavailable')
         return False
 
 
@@ -306,12 +306,12 @@ def arbitrary_command(command_string):
 
     """
     _send_command(command_string)
-    log.debug('Arbitrary command "%s" sent to device', command_string)
+    _log.debug('Arbitrary command "%s" sent to device', command_string)
     buffer = _read_response()
     if buffer is not None:
-        log.debug('Got "%s" command response message: %s', command_string, buffer)
+        _log.debug('Got "%s" command response message: %s', command_string, buffer)
         return buffer
-    log.debug('Received no response during "%s" command request', command_string)
+    _log.debug('Received no response during "%s" command request', command_string)
 
 
 
@@ -330,18 +330,18 @@ def initialize():
 
     """
     _send_command(AIRVIEW_COMMAND_INITIALIZE)
-    log.debug('Initialization command sent to device')
+    _log.debug('Initialization command sent to device')
     buffer = _read_response()
     if buffer is not None:
-        log.debug('Got final initialization response: %s', buffer)
+        _log.debug('Got final initialization response: %s', buffer)
         command_id, command_info, response_data = _parse_command_response(buffer)
         if command_id == 'stat':
-            log.debug('Airview device initialized')
+            _log.debug('Airview device initialized')
             return True
         else:
-            log.error('Unknown response to initialization command!!!')
+            _log.error('Unknown response to initialization command!!!')
             return False
-    log.debug('Got no buffer during initialize request')
+    _log.debug('Got no buffer during initialize request')
     return False
 
 
@@ -355,13 +355,13 @@ def get_device_info():
 
     """
     _send_command(AIRVIEW_COMMAND_GET_DEVICE_INFO)
-    log.debug('Device info command sent to device')
+    _log.debug('Device info command sent to device')
     buffer = _read_response()
     if buffer is not None:
-        log.debug('Got device info response message: %s', buffer)
+        _log.debug('Got device info response message: %s', buffer)
         command_id, command_info, response_data = _parse_command_response(buffer)
         if command_id == 'devi':
-            log.debug('Airview device info string: %s', response_data)
+            _log.debug('Airview device info string: %s', response_data)
             device_info = {}
 
             device_info_raw = response_data.split(',')
@@ -375,12 +375,12 @@ def get_device_info():
             device_info[AIRVIEW_DEVICE_RF_CHANNEL_END] = float(rf_info[1])
             device_info[AIRVIEW_DEVICE_RF_CHANNEL_SPACING] = float(rf_info[2])
             device_info[AIRVIEW_DEVICE_RF_SAMPLE_COUNT] = int(rf_info[3])
-            log.debug('Airview device info: %s', device_info)
+            _log.debug('Airview device info: %s', device_info)
             return device_info
         else:
-            log.error('Unknown response to device info command!!!')
+            _log.error('Unknown response to device info command!!!')
             return None
-    log.debug('Got no buffer during device info request')
+    _log.debug('Got no buffer during device info request')
     return None
 
 
@@ -394,7 +394,6 @@ def start_scan(callback):
         gracefully exits. Call stop_scan() to do that.
 
     """
-    log.debug('Starting scan in background thread')
     rx_thread = threading.Thread(target=_begin_scan_loop, args=(callback, rx_thread_stop))
     rx_thread.daemon = True
     rx_thread.start()
@@ -413,5 +412,4 @@ def stop_scan():
         are handled and various other things. Requires testing.
     
     """
-    log.debug('Stopping scan in background thread')
     rx_thread_stop.set()
