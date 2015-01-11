@@ -65,7 +65,7 @@ log.addHandler(mainHandler)
 
 
 def scan_callback(rssi_list):
-    log.info('RSSI levels received: %s', rssi_list)
+    log.info('Received %d RSSI level readings: %s', len(rssi_list), rssi_list)
 
 
 def scan(args):
@@ -80,7 +80,7 @@ def scan(args):
     except Exception as e:
         log.exception('Unknown error occurred')
     finally:
-        log.info('Exiting')
+        log.info('Scan ended')
         pyairview.disconnect()
 
 def device_info(args):
