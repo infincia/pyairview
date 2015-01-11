@@ -126,7 +126,7 @@ AIRVIEW_DEVICE_RF_SAMPLE_COUNT = 'AIRVIEW_DEVICE_RF_SAMPLE_COUNT'
 ###########
 
 # global serial port for the Airview
-serial_port = None
+_serial_port = None
 
 # background thread
 _rx_thread = None
@@ -146,9 +146,9 @@ def _send_command(command_string):
 
     """
     _log.debug('Sending command: %s', command_string)
-    serial_port.flushInput()
-    serial_port.write(command_string + AIRVIEW_PROTOCOL_DELIMITER)
-    serial_port.flushOutput()
+    _serial_port.flushInput()
+    _serial_port.write(command_string + AIRVIEW_PROTOCOL_DELIMITER)
+    _serial_port.flushOutput()
 
 
 def _read_response():
@@ -163,7 +163,7 @@ def _read_response():
     buffer = ''
     valid_response = False
     while True:
-        raw = serial_port.read()
+        raw = _serial_port.read()
         if len(raw) == 0:
             _log.debug('Got incomplete or no response message: %s', buffer)
             break
@@ -284,10 +284,10 @@ def connect(port):
         Returns True if the connection was successful
 
     """
-    global serial_port
+    global _serial_port
     try:
         _log.debug('Opening port: %s', port)
-        serial_port = serial.Serial(
+        _serial_port = serial.Serial(
             port = port,
             baudrate = 9600,
             stopbits = serial.STOPBITS_ONE,
@@ -307,11 +307,11 @@ def disconnect():
 
     """
     try:
-        _log.debug('Closing port: %s', serial_port.port)
-        serial_port.close()
-        return not serial_port.isOpen()
+        _log.debug('Closing port: %s', _serial_port.port)
+        _serial_port.close()
+        return not _serial_port.isOpen()
     except serial.serialutil.SerialException:
-        _log.exception('Unknown error occurred while closing serial port: %s', serial_port.port)
+        _log.exception('Unknown error occurred while closing serial port: %s', _serial_port.port)
         return False
 
 
