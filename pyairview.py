@@ -231,7 +231,18 @@ def _begin_scan_loop(callback, thread_stop):
                 log.debug('---------------------------------------')
                 log.debug('Received %d RSSI readings: %s', len(rssi_list), rssi_list)
                 log.debug('---------------------------------------')
-                callback(rssi_list=rssi_list)
+                """
+                    This is the expected number of RSSI readings. Only return
+                    them in the callback if the proper number of readings has
+                    been received in this grouping.
+                    
+                    This number should be read directly from get_device_info() 
+                    instead of being hardcoded, as it may differ on 900MHz and 
+                    5GHz devices.
+                
+                """
+                if len(rssi_list) == 173:
+                    callback(rssi_list=rssi_list)
             else:
                 log.debug('Got unknown response during scan: %s', buffer)
                 continue
