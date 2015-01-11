@@ -104,6 +104,8 @@ AIRVIEW_COMMAND_GET_DEVICE_INFO = 'gdi'
 AIRVIEW_COMMAND_BEGIN_SCAN = 'bs'
 AIRVIEW_COMMAND_END_SCAN = 'es'
 
+AIRVIEW_PROTOCOL_DELIMITER = '\n'
+
 
 AIRVIEW_DEVICE_USB_ID = 'AIRVIEW_DEVICE_USB_ID'
 AIRVIEW_DEVICE_FIRMWARE_VERSION = 'AIRVIEW_DEVICE_FIRMWARE_VERSION'
@@ -141,7 +143,7 @@ def _send_command(command_string):
 
     """
     log.debug('Sending command: %s', command_string)
-    serial_port.write(command_string + '\r\n')
+    serial_port.write(command_string + AIRVIEW_PROTOCOL_DELIMITER)
     serial_port.flushOutput()
 
 
@@ -162,7 +164,7 @@ def _read_response():
             log.debug('Got incomplete or no response message: %s', buffer)
             break
         buffer += raw
-        if buffer[-1:] == '\n':
+        if buffer[-1:] == AIRVIEW_PROTOCOL_DELIMITER:
             valid_response = True
             log.debug('Got proper response end')
             break
