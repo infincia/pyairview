@@ -397,8 +397,6 @@ def start_scan(callback):
     rx_thread = threading.Thread(target=_begin_scan_loop, args=(callback, rx_thread_stop))
     rx_thread.daemon = True
     rx_thread.start()
-    while rx_thread.isAlive:
-        rx_thread.join(5)
 
 
 
