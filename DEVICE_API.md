@@ -3,7 +3,7 @@
 Airview devices have an undocumented, but fairly simple text based API available 
 over the USB CDC-ACM virtual serial port provided by the device.
             
-Commands are simple ASCII strings followed by carriage return + linefeed ('\r\n').
+Commands are simple ASCII strings followed by a linefeed byte ('\n').
             
 For commands that return a response (some don't), the response format is a byte 
 sequence that looks like this (linefeed added for clarity):
