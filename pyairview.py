@@ -363,7 +363,7 @@ def get_device_info():
 
 
 
-def start_scan(callback=None):
+def start_scan(callback):
     """
         Start the scan thread and block the caller until the thread
         gracefully exits. Call stop_scan() to do that.
