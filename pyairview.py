@@ -239,7 +239,18 @@ def _begin_scan_loop(callback, thread_stop):
     log.debug('Scan thread loop ended')
 
 
+def _end_scan():
+    """
+        End the RF power level scan stream previously started by sending the 'bs'
+        command to the device via start_scan()
+        
+        The device will immediately stop returning results, even if a partial
+        response was in progress. In addition this command returns no response
+        of its own, unlike all the others.
 
+    """
+    _send_command(AIRVIEW_COMMAND_END_SCAN)
+    log.debug('End scan command sent to device')
 
 
 
