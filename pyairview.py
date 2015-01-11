@@ -323,7 +323,7 @@ def get_device_info():
         log.debug('Got device info response message: %s', buffer)
         command_id, command_info, response_data = _parse_command_response(buffer)
         if command_id == 'devi':
-            log.debug('Airview device info: %s', response)
+            log.debug('Airview device info: %s', response_data)
             return response_data
         else:
             log.error('Unknown response to device info command!!!')
