@@ -14,14 +14,14 @@
 		AA8C3D4E1A60A9E000ACA8D4 /* README.rst */ = {isa = PBXFileReference; lastKnownFileType = text; path = README.rst; sourceTree = "<group>"; };
 		AA8C3D4F1A60B59C00ACA8D4 /* DEVICE_API.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = DEVICE_API.md; sourceTree = "<group>"; };
 		AA8C3D501A60FA1F00ACA8D4 /* .travis.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = .travis.yml; sourceTree = "<group>"; };
-		AA8C3D521A60FEA400ACA8D4 /* test.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = test.py; sourceTree = "<group>"; };
 		AA8C3D571A62346900ACA8D4 /* pyairview_test.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = pyairview_test.py; sourceTree = "<group>"; };
 		AA8C3D581A62346900ACA8D4 /* pyairview.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = pyairview.py; sourceTree = "<group>"; };
-		AA8C3D591A623DE100ACA8D4 /* __init__.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = __init__.py; sourceTree = "<group>"; };
 		AA8C3D5A1A623F2F00ACA8D4 /* MANIFEST.in */ = {isa = PBXFileReference; lastKnownFileType = text; path = MANIFEST.in; sourceTree = "<group>"; };
 		AA8C3D5B1A623F6300ACA8D4 /* AUTHORS */ = {isa = PBXFileReference; lastKnownFileType = text; path = AUTHORS; sourceTree = "<group>"; };
 		AA8C3D5C1A623F9100ACA8D4 /* TODO */ = {isa = PBXFileReference; lastKnownFileType = text; path = TODO; sourceTree = "<group>"; };
 		AA8C3D5D1A623FC900ACA8D4 /* changelog.rst */ = {isa = PBXFileReference; lastKnownFileType = text; path = changelog.rst; sourceTree = "<group>"; };
+		AA8C3D5F1A624C0200ACA8D4 /* __init__.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = __init__.py; sourceTree = "<group>"; };
+		AA8C3D601A624C0200ACA8D4 /* test.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = test.py; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -40,19 +40,18 @@
 				AA8C3D4E1A60A9E000ACA8D4 /* README.rst */,
 				AA8C3D4C1A60A5BE00ACA8D4 /* setup.cfg */,
 				AA8C3D4D1A60A5BE00ACA8D4 /* setup.py */,
-				AA8C3D511A60FDAD00ACA8D4 /* test */,
+				AA8C3D5E1A624C0200ACA8D4 /* test */,
 				AA8C3D5C1A623F9100ACA8D4 /* TODO */,
 			);
 			sourceTree = "<group>";
 		};
-		AA8C3D511A60FDAD00ACA8D4 /* test */ = {
+		AA8C3D5E1A624C0200ACA8D4 /* test */ = {
 			isa = PBXGroup;
 			children = (
-				AA8C3D521A60FEA400ACA8D4 /* test.py */,
-				AA8C3D591A623DE100ACA8D4 /* __init__.py */,
+				AA8C3D5F1A624C0200ACA8D4 /* __init__.py */,
+				AA8C3D601A624C0200ACA8D4 /* test.py */,
 			);
-			name = test;
-			path = tests;
+			path = test;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
