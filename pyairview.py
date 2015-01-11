@@ -225,14 +225,14 @@ def _begin_scan_loop(callback, thread_stop):
                 log.debug('---------------------------------------')
                 log.debug('raw samples: %s', raw_samples)
                 log.debug('---------------------------------------')
-                cleaned_list = list()
+                rssi_list = list()
                 for rssi_level in raw_samples:
-                    cleaned_list.append(int(rssi_level))
+                    rssi_list.append(int(rssi_level))
                 log.debug('---------------------------------------')
-                log.debug('Length of sample list: %d', len(cleaned_list))
-                log.debug('Cleaned rssi list: %s', cleaned_list)
+                log.debug('Length of sample list: %d', len(rssi_list))
+                log.debug('Final RSSI list: %s', rssi_list)
                 log.debug('---------------------------------------')
-                callback(rssi_list=cleaned_list)
+                callback(rssi_list=rssi_list)
             else:
                 log.debug('Got unknown response during scan: %s', buffer)
                 continue
