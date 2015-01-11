@@ -64,7 +64,7 @@ mainHandler.setFormatter(logging.Formatter('%(message)s'))
 log.addHandler(mainHandler)
 
 
-def scan_callback(rssi_list=None):
+def scan_callback(rssi_list):
     log.info('RSSI levels received: %s', rssi_list)
 
 

@@ -42,7 +42,7 @@ See the DEVICE_API.md file included in this repository
         exact frequencies.
 
     """
-    def scan_callback(rssi_list=None):
+    def scan_callback(rssi_list):
         print('RSSI levels received: %s', rssi_list)
 
     pyairview.start_scan(callback=scan_callback)
