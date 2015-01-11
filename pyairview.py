@@ -229,8 +229,7 @@ def _begin_scan_loop(callback, thread_stop):
                 for rssi_level in raw_samples:
                     rssi_list.append(int(rssi_level))
                 log.debug('---------------------------------------')
-                log.debug('Length of sample list: %d', len(rssi_list))
-                log.debug('Final RSSI list: %s', rssi_list)
+                log.debug('Received %d RSSI readings: %s', len(rssi_list), rssi_list)
                 log.debug('---------------------------------------')
                 callback(rssi_list=rssi_list)
             else:
