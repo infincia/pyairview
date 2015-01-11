@@ -7,42 +7,51 @@
 	objects = {
 
 /* Begin PBXFileReference section */
-		AA086DA51A5A63A8006C9731 /* requirements.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = requirements.txt; sourceTree = "<group>"; };
-		AA19ECFE16FC02200041655E /* libairview.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = libairview.py; sourceTree = "<group>"; };
 		AA19ECFF16FC02200041655E /* README.md */ = {isa = PBXFileReference; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
-		AA19ED0316FC0D980041655E /* libairview_test.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = libairview_test.py; sourceTree = "<group>"; };
 		AA8C3D4B1A60A5BE00ACA8D4 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		AA8C3D4C1A60A5BE00ACA8D4 /* setup.cfg */ = {isa = PBXFileReference; lastKnownFileType = text; path = setup.cfg; sourceTree = "<group>"; };
 		AA8C3D4D1A60A5BE00ACA8D4 /* setup.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = setup.py; sourceTree = "<group>"; };
 		AA8C3D4E1A60A9E000ACA8D4 /* README.rst */ = {isa = PBXFileReference; lastKnownFileType = text; path = README.rst; sourceTree = "<group>"; };
 		AA8C3D4F1A60B59C00ACA8D4 /* DEVICE_API.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = DEVICE_API.md; sourceTree = "<group>"; };
 		AA8C3D501A60FA1F00ACA8D4 /* .travis.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = .travis.yml; sourceTree = "<group>"; };
-		AA8C3D521A60FEA400ACA8D4 /* tests.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = tests.py; sourceTree = "<group>"; };
+		AA8C3D521A60FEA400ACA8D4 /* test.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = test.py; sourceTree = "<group>"; };
+		AA8C3D571A62346900ACA8D4 /* pyairview_test.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = pyairview_test.py; sourceTree = "<group>"; };
+		AA8C3D581A62346900ACA8D4 /* pyairview.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = pyairview.py; sourceTree = "<group>"; };
+		AA8C3D591A623DE100ACA8D4 /* __init__.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = __init__.py; sourceTree = "<group>"; };
+		AA8C3D5A1A623F2F00ACA8D4 /* MANIFEST.in */ = {isa = PBXFileReference; lastKnownFileType = text; path = MANIFEST.in; sourceTree = "<group>"; };
+		AA8C3D5B1A623F6300ACA8D4 /* AUTHORS */ = {isa = PBXFileReference; lastKnownFileType = text; path = AUTHORS; sourceTree = "<group>"; };
+		AA8C3D5C1A623F9100ACA8D4 /* TODO */ = {isa = PBXFileReference; lastKnownFileType = text; path = TODO; sourceTree = "<group>"; };
+		AA8C3D5D1A623FC900ACA8D4 /* changelog.rst */ = {isa = PBXFileReference; lastKnownFileType = text; path = changelog.rst; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
 		AA19ECF716FC018E0041655E = {
 			isa = PBXGroup;
 			children = (
+				AA8C3D5D1A623FC900ACA8D4 /* changelog.rst */,
+				AA8C3D5C1A623F9100ACA8D4 /* TODO */,
+				AA8C3D5B1A623F6300ACA8D4 /* AUTHORS */,
 				AA8C3D501A60FA1F00ACA8D4 /* .travis.yml */,
-				AA19ED0316FC0D980041655E /* libairview_test.py */,
-				AA19ECFE16FC02200041655E /* libairview.py */,
-				AA8C3D4B1A60A5BE00ACA8D4 /* LICENSE */,
-				AA19ECFF16FC02200041655E /* README.md */,
 				AA8C3D4F1A60B59C00ACA8D4 /* DEVICE_API.md */,
+				AA8C3D4B1A60A5BE00ACA8D4 /* LICENSE */,
+				AA8C3D5A1A623F2F00ACA8D4 /* MANIFEST.in */,
+				AA8C3D571A62346900ACA8D4 /* pyairview_test.py */,
+				AA8C3D581A62346900ACA8D4 /* pyairview.py */,
+				AA19ECFF16FC02200041655E /* README.md */,
 				AA8C3D4E1A60A9E000ACA8D4 /* README.rst */,
-				AA086DA51A5A63A8006C9731 /* requirements.txt */,
 				AA8C3D4C1A60A5BE00ACA8D4 /* setup.cfg */,
 				AA8C3D4D1A60A5BE00ACA8D4 /* setup.py */,
-				AA8C3D511A60FDAD00ACA8D4 /* tests */,
+				AA8C3D511A60FDAD00ACA8D4 /* test */,
 			);
 			sourceTree = "<group>";
 		};
-		AA8C3D511A60FDAD00ACA8D4 /* tests */ = {
+		AA8C3D511A60FDAD00ACA8D4 /* test */ = {
 			isa = PBXGroup;
 			children = (
-				AA8C3D521A60FEA400ACA8D4 /* tests.py */,
+				AA8C3D521A60FEA400ACA8D4 /* test.py */,
+				AA8C3D591A623DE100ACA8D4 /* __init__.py */,
 			);
+			name = test;
 			path = tests;
 			sourceTree = "<group>";
 		};
