@@ -60,7 +60,7 @@ import pyairview
 log = logging.getLogger()
 mainHandler = logging.StreamHandler()
 log.setLevel(logging.INFO)
-mainHandler.setFormatter(logging.Formatter('%(levelname)s %(asctime)s - %(module)s - %(funcName)s: %(message)s'))
+mainHandler.setFormatter(logging.Formatter('%(message)s'))
 log.addHandler(mainHandler)
 
 
@@ -130,6 +130,7 @@ def fuzzer(args):
 if __name__ == '__main__':
     arg_parser = argparse.ArgumentParser(description='Airview2 test program')
     arg_parser.add_argument('-p', '--port', help='The serial port of the Airview2 device (/dev/tty*)', required=True)
+    arg_parser.add_argument('-d', '--debug', action='store_true', help='Print debug messages')
 
     subparsers = arg_parser.add_subparsers()
     parser_fuzzer = subparsers.add_parser('fuzzer')
@@ -144,6 +145,9 @@ if __name__ == '__main__':
 
     args = arg_parser.parse_args()
 
+    if args.debug:
+        log.setLevel(logging.DEBUG)
+        mainHandler.setFormatter(logging.Formatter('%(levelname)s %(asctime)s - %(module)s - %(funcName)s: %(message)s'))
     connected = pyairview.connect(port=args.port)
     if not connected:
         log.error('Port already in use')
