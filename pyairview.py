@@ -249,7 +249,7 @@ def _begin_scan_loop(callback, thread_stop):
 
 # public API
 
-def connect(port=None):
+def connect(port):
     """
         Connects to the given serial port, must be called before anything else.
         
