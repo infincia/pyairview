@@ -107,6 +107,19 @@ AIRVIEW_COMMAND_BEGIN_SCAN = 'bs'
 AIRVIEW_COMMAND_END_SCAN = 'es'
 
 
+AIRVIEW_DEVICE_USB_ID = 'AIRVIEW_DEVICE_USB_ID'
+AIRVIEW_DEVICE_FIRMWARE_VERSION = 'AIRVIEW_DEVICE_FIRMWARE_VERSION'
+AIRVIEW_DEVICE_HARDWARE_VERSION = 'AIRVIEW_DEVICE_HARDWARE_VERSION'
+AIRVIEW_DEVICE_FIRMWARE_DATE = 'AIRVIEW_DEVICE_FIRMWARE_DATE'
+AIRVIEW_DEVICE_RF_CHANNEL_START = 'AIRVIEW_DEVICE_RF_CHANNEL_START'
+AIRVIEW_DEVICE_RF_CHANNEL_END = 'AIRVIEW_DEVICE_RF_CHANNEL_END'
+AIRVIEW_DEVICE_RF_CHANNEL_SPACING = 'AIRVIEW_DEVICE_RF_CHANNEL_SPACING'
+AIRVIEW_DEVICE_RF_SAMPLE_COUNT = 'AIRVIEW_DEVICE_RF_SAMPLE_COUNT'
+
+
+
+
+
 
 ###########
 # globals #
@@ -323,8 +336,22 @@ def get_device_info():
         log.debug('Got device info response message: %s', buffer)
         command_id, command_info, response_data = _parse_command_response(buffer)
         if command_id == 'devi':
-            log.debug('Airview device info: %s', response_data)
-            return response_data
+            log.debug('Airview device info string: %s', response_data)
+            device_info = {}
+
+            device_info_raw = response_data.split(',')
+            device_info[AIRVIEW_DEVICE_USB_ID] = device_info_raw[0]
+            device_info[AIRVIEW_DEVICE_FIRMWARE_VERSION] = device_info_raw[1]
+            device_info[AIRVIEW_DEVICE_HARDWARE_VERSION] = device_info_raw[2]
+            device_info[AIRVIEW_DEVICE_FIRMWARE_DATE] = device_info_raw[3]
+
+            rf_info = device_info_raw[5].split()
+            device_info[AIRVIEW_DEVICE_RF_CHANNEL_START] = float(rf_info[0])
+            device_info[AIRVIEW_DEVICE_RF_CHANNEL_END] = float(rf_info[1])
+            device_info[AIRVIEW_DEVICE_RF_CHANNEL_SPACING] = float(rf_info[2])
+            device_info[AIRVIEW_DEVICE_RF_SAMPLE_COUNT] = int(rf_info[3])
+            log.debug('Airview device info: %s', device_info)
+            return device_info
         else:
             log.error('Unknown response to device info command!!!')
             return None
