@@ -78,7 +78,23 @@ def scan(args):
     finally:
         log.info('Exiting')
 
+def device_info(args):
+    log.info('Getting Airview device info')
+    try:
+        device = pyairview.get_device_info()
 
+        log.info('Airview firmware version: %s', device[pyairview.AIRVIEW_DEVICE_FIRMWARE_VERSION])
+        log.info('Airview firmware date: %s', device[pyairview.AIRVIEW_DEVICE_FIRMWARE_DATE])
+        log.info('Airview hardware version: %s', device[pyairview.AIRVIEW_DEVICE_HARDWARE_VERSION])
+        log.info('Airview RF start: %.3fMHz', device[pyairview.AIRVIEW_DEVICE_RF_CHANNEL_START])
+        log.info('Airview RF end: %.3fMHz', device[pyairview.AIRVIEW_DEVICE_RF_CHANNEL_END])
+        log.info('Airview RF channel spacing: %.3fMHz', device[pyairview.AIRVIEW_DEVICE_RF_CHANNEL_SPACING])
+        log.info('Airview RF sample count: %d', device[pyairview.AIRVIEW_DEVICE_RF_SAMPLE_COUNT])
+
+    except KeyboardInterrupt as e:
+        pass
+    finally:
+        log.info('Exiting')
 
 def fuzzer(args):
     log.info('Starting Airview API Fuzzer')
@@ -122,6 +138,9 @@ if __name__ == '__main__':
 
     parser_scan = subparsers.add_parser('scan')
     parser_scan.set_defaults(func=scan)
+
+    device_info_scan = subparsers.add_parser('deviceinfo')
+    device_info_scan.set_defaults(func=device_info)
 
     args = arg_parser.parse_args()
 
