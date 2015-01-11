@@ -75,6 +75,8 @@ def scan(args):
     except KeyboardInterrupt as e:
         log.info('Cancelling scan')
         pyairview.stop_scan()
+    except Exception as e:
+        log.exception('Unknown error occurred')
     finally:
         log.info('Exiting')
 
@@ -92,7 +94,8 @@ def device_info(args):
 
     except KeyboardInterrupt as e:
         pass
-
+    except Exception as e:
+        log.exception('Unknown error occurred')
 
 def fuzzer(args):
     log.info('Starting Airview API Fuzzer')
@@ -120,6 +123,8 @@ def fuzzer(args):
 
     except KeyboardInterrupt as e:
         log.info('Canceling API search due to keyboard interrupt')
+    except Exception as e:
+        log.exception('Unknown error occurred')
     finally:
         log.info('Checked %d commands total and got %d valid responses: %s', check_count, len(found_commands), found_commands)
         log.info('Exiting')
