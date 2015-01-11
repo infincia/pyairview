@@ -286,7 +286,7 @@ def connect(port):
     """
     global serial_port
     try:
-        _log.debug('Opening port: %s' % port)
+        _log.debug('Opening port: %s', port)
         serial_port = serial.Serial(
             port = port,
             baudrate = 9600,
