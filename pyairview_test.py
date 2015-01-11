@@ -81,6 +81,7 @@ def scan(args):
         log.exception('Unknown error occurred')
     finally:
         log.info('Exiting')
+        pyairview.disconnect()
 
 def device_info(args):
     try:
@@ -98,6 +99,8 @@ def device_info(args):
         pass
     except Exception as e:
         log.exception('Unknown error occurred')
+    finally:
+        pyairview.disconnect()
 
 def fuzzer(args):
     log.info('Starting Airview API Fuzzer')
@@ -130,6 +133,7 @@ def fuzzer(args):
     finally:
         log.info('Checked %d commands total and got %d valid responses: %s', check_count, len(found_commands), found_commands)
         log.info('Exiting')
+        pyairview.disconnect()
 
 
 if __name__ == '__main__':
