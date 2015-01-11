@@ -403,7 +403,8 @@ def start_scan(callback):
     _rx_thread.start()
 
 
-
+def is_scanning():
+    return _rx_thread.is_alive()
 
 
 def stop_scan():
