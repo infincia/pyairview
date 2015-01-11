@@ -1,0 +1,7 @@
+include LICENSE
+include README.rst
+include DEVICE_API.md
+include TODO
+include changelog.rst
+include MANIFEST.in
+include AUTHORS
