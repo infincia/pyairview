@@ -50,7 +50,7 @@ import logging.handlers
 import sys
 import argparse
 import itertools
-
+from time import sleep
 
 import pyairview
 
@@ -72,6 +72,8 @@ def scan(args):
     log.info('Starting Airview RSSI scan')
     try:
         pyairview.start_scan(callback=scan_callback)
+        while pyairview.is_scanning():
+            sleep(0.1)
     except KeyboardInterrupt as e:
         log.info('Cancelling scan')
         pyairview.stop_scan()
