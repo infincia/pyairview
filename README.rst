@@ -41,11 +41,9 @@ Usage
     # open the proper serial port
     pyairview.connect(port="/dev/ttyACM0")
 
-    # initialize the device
-    pyairview.initialize()
-
     # retrieve device-specific information like RF frequency range and channel size
     device_info = pyairview.get_device_info()
+    print('Device info: %s', device_info)
 
     """
         start RSSI scanning in a background thread. callback should take a parameter
