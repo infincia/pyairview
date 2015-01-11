@@ -14,6 +14,7 @@ from __future__ import print_function
     ----------------------------------------------------------------------------
     
         from __future__ import print_function
+        from time import sleep
 
         import pyairview
 
@@ -31,12 +32,16 @@ from __future__ import print_function
             exact frequencies.
 
         '''
-        def scan_callback(rssi_list=None):
-            print('RSSI levels received: %s', rssi_list)
+        def scan_callback(rssi_list):
+            print('Received %d RSSI level readings: %s', len(rssi_list), rssi_list)
 
         pyairview.start_scan(callback=scan_callback)
 
-
+        some_condition = False
+        while pyairview.is_scanning():
+            sleep(0.1) # or do something else, change some_condition, etc
+            if some_condition == True:
+                pyairview.stop_scan()
 
 	Device API documentation
     ----------------------------------------------------------------------------
