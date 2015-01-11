@@ -128,8 +128,11 @@ AIRVIEW_DEVICE_RF_SAMPLE_COUNT = 'AIRVIEW_DEVICE_RF_SAMPLE_COUNT'
 # global serial port for the Airview
 serial_port = None
 
+# background thread
+_rx_thread = None
+
 # scan thread exit event
-rx_thread_stop = threading.Event()
+_rx_thread_stop = threading.Event()
 
 _log = logging.getLogger(__name__)
 
@@ -394,9 +397,10 @@ def start_scan(callback):
         gracefully exits. Call stop_scan() to do that.
 
     """
-    rx_thread = threading.Thread(target=_begin_scan_loop, args=(callback, rx_thread_stop))
-    rx_thread.daemon = True
-    rx_thread.start()
+    global _rx_thread
+    _log.debug('Starting scan in background thread')
+    _rx_thread = threading.Thread(target=_begin_scan_loop, args=(callback, _rx_thread_stop))
+    _rx_thread.start()
 
 
 
@@ -410,4 +414,7 @@ def stop_scan():
         are handled and various other things. Requires testing.
     
     """
-    rx_thread_stop.set()
+    _log.debug('Stopping scan in background thread')
+    while _rx_thread.is_alive():
+        _rx_thread_stop.set()
+    _rx_thread_stop.clear()
