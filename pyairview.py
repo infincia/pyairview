@@ -143,6 +143,7 @@ def _send_command(command_string):
 
     """
     log.debug('Sending command: %s', command_string)
+    serial_port.flushInput()
     serial_port.write(command_string + AIRVIEW_PROTOCOL_DELIMITER)
     serial_port.flushOutput()
 
