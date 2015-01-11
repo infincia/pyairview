@@ -300,6 +300,22 @@ def connect(port):
         return False
 
 
+def disconnect():
+    """
+        Closes the current serial port, returning True if the port is no longer
+        open and False if it is still open for some reason.
+
+    """
+    try:
+        _log.debug('Closing port: %s', serial_port.port)
+        serial_port.close()
+        return not serial_port.isOpen()
+    except serial.serialutil.SerialException:
+        _log.exception('Unknown error occurred while closing serial port: %s', serial_port.port)
+        return False
+
+
+
 
 
 
