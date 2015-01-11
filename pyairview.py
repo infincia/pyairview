@@ -407,9 +407,10 @@ def start_scan(callback):
 
 def stop_scan():
     """
-        Should cause the rx_thread to stop looping and gracefully exit. Should.
-        It may not at the moment depending on how exceptions are handled and
-        various other things.
+        Use a thread event to cause the scan loop to gracefully exit.
+
+        It may not be a robust solution at the moment, depending on how exceptions 
+        are handled and various other things. Requires testing.
     
     """
     rx_thread_stop.set()
