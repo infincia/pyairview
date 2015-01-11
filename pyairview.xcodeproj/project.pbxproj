@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXFileReference section */
-		AA19ECFF16FC02200041655E /* README.md */ = {isa = PBXFileReference; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		AA8C3D4B1A60A5BE00ACA8D4 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		AA8C3D4C1A60A5BE00ACA8D4 /* setup.cfg */ = {isa = PBXFileReference; lastKnownFileType = text; path = setup.cfg; sourceTree = "<group>"; };
 		AA8C3D4D1A60A5BE00ACA8D4 /* setup.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = setup.py; sourceTree = "<group>"; };
@@ -36,7 +35,6 @@
 				AA8C3D5A1A623F2F00ACA8D4 /* MANIFEST.in */,
 				AA8C3D571A62346900ACA8D4 /* pyairview_test.py */,
 				AA8C3D581A62346900ACA8D4 /* pyairview.py */,
-				AA19ECFF16FC02200041655E /* README.md */,
 				AA8C3D4E1A60A9E000ACA8D4 /* README.rst */,
 				AA8C3D4C1A60A5BE00ACA8D4 /* setup.cfg */,
 				AA8C3D4D1A60A5BE00ACA8D4 /* setup.py */,
