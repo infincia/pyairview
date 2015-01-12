@@ -109,7 +109,7 @@ def fuzzer(args):
         found_commands = {}
         check_count = 0
 
-        for length in xrange(args.length):
+        for length in range(args.length):
             for command in itertools.product('abcdefghijklmnopqrstuvwxyz', repeat=length):
                 check_count = check_count + 1
                 command_string = ''.join(command)
