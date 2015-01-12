@@ -87,7 +87,7 @@ loop coupled with a function to use the native RSSI power level scanning provide
 by the chip.
 
 Library development and reverse engineering
-----------------------------------
+-------------------------------------------
 
 This library was created after hours and hours of manual testing with ``gtkterm``
 and ``screen``, guessing the proper commands to use the device API. None of the
