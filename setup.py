@@ -22,7 +22,7 @@ def read_file(name, *args):
 
 
 setup(name='pyairview',
-    version='0.1.dev1',
+    version='0.1a1',
     description='PyAirview is a very simple Python library for the Ubiquiti Airview2 2.4GHz spectrum analyzer, which has an undocumented device API.',
     long_description=read_file('README.rst'),
     author='Stephen Oliver',
