@@ -2,6 +2,9 @@
 PyAirview
 ============================
 
+.. _CC2011: http://www.ti.com/product/cc2511
+.. _DEVICE_API.md: https://github.com/infincia/pyairview/blob/master/DEVICE_API.md
+
 .. image:: https://pypip.in/license/pyairview/badge.svg
     :target: https://pypi.python.org/pypi/pyairview/
     :alt: License
@@ -112,9 +115,3 @@ without discussing it with me first.
 
 If you want to help, feel free to review the code for flaws, or open a terminal 
 connected to your Airview device and guess some commands as I have done :)
-
-
-
-
-.. _CC2011: http://www.ti.com/product/cc2511
-.. _DEVICE_API.md: https://github.com/infincia/pyairview/blob/master/DEVICE_API.md
