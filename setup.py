@@ -11,7 +11,8 @@ except ImportError:
 
 
 py = sys.version_info
-if py < (2,7) or not py >= (3,2):
+print('Python version: %s', py)
+if py < (2,7) and py < (3,2):
     raise NotImplementedError("PyAirview requires Python 2.7 or Python 3.2+")
 
 def read_file(name, *args):
