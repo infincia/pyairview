@@ -54,7 +54,7 @@ from __future__ import print_function
 __author__ = 'Stephen Oliver'
 __maintainer__ = 'Stephen Oliver <steve@infincia.com>'
 __license__ = 'MIT'
-
+__version__ = '0.1a2'
 
 import time
 import string

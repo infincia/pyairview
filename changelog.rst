@@ -3,6 +3,10 @@ Changelog
 
 .. currentmodule:: PyAirview
 
+Release 0.1a2
+-------------
+
+- Single-file Python 2.7 and 3.2+ compatibility
 
 Release 0.1a1
 -------------
