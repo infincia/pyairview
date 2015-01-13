@@ -1,8 +1,6 @@
 Changelog
 =========
 
-.. currentmodule:: PyAirview
-
 Release 0.1a2
 -------------
 
