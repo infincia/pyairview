@@ -104,12 +104,12 @@ RESPONSE_REGEX_PATTERN = "^(?P<command_id>\w+)\|(?P<command_info>[\w\s]+),(?P<re
 """
 
 
-AIRVIEW_COMMAND_INITIALIZE = 'init'
-AIRVIEW_COMMAND_GET_DEVICE_INFO = 'gdi'
-AIRVIEW_COMMAND_BEGIN_SCAN = 'bs'
-AIRVIEW_COMMAND_END_SCAN = 'es'
+AIRVIEW_COMMAND_INITIALIZE      = b'init'
+AIRVIEW_COMMAND_GET_DEVICE_INFO = b'gdi'
+AIRVIEW_COMMAND_BEGIN_SCAN      = b'bs'
+AIRVIEW_COMMAND_END_SCAN        = b'es'
 
-AIRVIEW_PROTOCOL_DELIMITER = '\n'
+AIRVIEW_PROTOCOL_DELIMITER = b'\n'
 
 
 AIRVIEW_DEVICE_USB_ID = 'AIRVIEW_DEVICE_USB_ID'
@@ -152,7 +152,7 @@ def _send_command(command_string):
     """
     _log.debug('Sending command: %s', command_string)
     _serial_port.flushInput()
-    _serial_port.write(command_string + AIRVIEW_PROTOCOL_DELIMITER)
+    _serial_port.write(bytearray(command_string + AIRVIEW_PROTOCOL_DELIMITER))
     _serial_port.flushOutput()
 
 
@@ -165,14 +165,14 @@ def _read_response():
 
     """
     _log.debug('Reading command response')
-    buffer = ''
+    buffer = bytearray()
     valid_response = False
     while True:
         raw = _serial_port.read()
         if len(raw) == 0:
             _log.debug('Got incomplete or no response message: %s', buffer)
             break
-        buffer += raw
+        buffer.extend(raw)
         if buffer[-1:] == AIRVIEW_PROTOCOL_DELIMITER:
             valid_response = True
             _log.debug('Got proper response end')
@@ -192,7 +192,7 @@ def _parse_command_response(buffer):
         Returns a tuple of all three important response components.
 
     """
-    match = re.match(RESPONSE_REGEX_PATTERN, buffer)
+    match = re.match(RESPONSE_REGEX_PATTERN, buffer.decode('ascii'))
     if match:
         command_id = match.group('command_id')
         command_info = match.group('command_info')
@@ -329,7 +329,7 @@ def arbitrary_command(command_string):
         Send arbitrary command and return the full response
 
     """
-    _send_command(command_string)
+    _send_command(command_string.encode('ascii'))
     _log.debug('Arbitrary command "%s" sent to device', command_string)
     buffer = _read_response()
     if buffer is not None:
