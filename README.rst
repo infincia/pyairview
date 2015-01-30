@@ -16,6 +16,10 @@ PyAirview
 .. image:: https://pypip.in/status/pyairview/badge.svg
     :target: https://pypi.python.org/pypi/pyairview/
     :alt: Development Status
+    
+.. image:: https://pypip.in/version/pyairview/badge.svg
+    :target: https://pypi.python.org/pypi/pyairview/
+    :alt: Latest Version
 
 .. image:: https://travis-ci.org/infincia/pyairview.svg?branch=master
     :target: https://travis-ci.org/infincia/pyairview
