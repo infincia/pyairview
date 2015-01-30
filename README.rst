@@ -5,19 +5,19 @@ PyAirview
 .. _CC2011: http://www.ti.com/product/cc2511
 .. _DEVICE_API.md: https://github.com/infincia/pyairview/blob/master/DEVICE_API.md
 
-.. image:: https://pypip.in/license/pyairview/badge.svg
+.. image:: https://pypip.in/license/pyairview/badge.svg?style=flat
     :target: https://pypi.python.org/pypi/pyairview/
     :alt: License
 
-.. image:: https://pypip.in/py_versions/pyairview/badge.svg
+.. image:: https://pypip.in/py_versions/pyairview/badge.svg?style=flat
     :target: https://pypi.python.org/pypi/pyairview/
     :alt: Supported Python versions
 
-.. image:: https://pypip.in/status/pyairview/badge.svg
+.. image:: https://pypip.in/status/pyairview/badge.svg?style=flat
     :target: https://pypi.python.org/pypi/pyairview/
     :alt: Development Status
     
-.. image:: https://pypip.in/version/pyairview/badge.svg
+.. image:: https://pypip.in/version/pyairview/badge.svg?style=flat
     :target: https://pypi.python.org/pypi/pyairview/
     :alt: Latest Version
 
