@@ -1,4 +1,4 @@
-#Airview2 device API documentation
+# Airview2 device API documentation
 
 Airview devices have an undocumented, but fairly simple text based API available 
 over the USB CDC-ACM virtual serial port provided by the device.
@@ -24,7 +24,7 @@ In order, the format is:
 
 
 
-###Commands
+### Commands
 
 Currently I know just enough about the API commands to reliably use the device 
 for its intended purpose. 
@@ -40,7 +40,7 @@ response (there is at least one found so far: `es`).
 
 
 
-#####Initialize device 
+##### Initialize device 
 
     Command: 'init'
     
@@ -75,7 +75,7 @@ of stopping an RSSI scan initiated with the `bs` command.
 
         
         
-#####Get device info
+##### Get device info
 
     Command: 'gdi'
 
@@ -117,7 +117,7 @@ at the moment.
 
 
 
-#####Begin RF scan
+##### Begin RF scan
 
     Command: 'bs'
 
@@ -147,7 +147,7 @@ corresponding 'es' or "end scan" command, and the scan immediately stopped.*
 
 
 
-#####End RF scan
+##### End RF scan
 
     Command: 'es'
 
